@@ -1,5 +1,6 @@
 package com.example.activityandnavigationlesson
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -19,6 +20,8 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     binding = ActivityCreateContactBinding.inflate(layoutInflater)
     setContentView(binding.root)
+
+    requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //фиксированная портретная ориентация
 //--------------------------------------------------------------------------------------------------
     supportFragmentManager
         .beginTransaction().replace(R.id.frame, Contacts.newInstance()).commit()

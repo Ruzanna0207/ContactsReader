@@ -1,4 +1,4 @@
-package com.example.activityandnavigationlesson
+package com.example.activityandnavigationlesson.model
 
 import android.content.ContentProvider
 import android.content.ContentValues
