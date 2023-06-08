@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Activity and navigation lesson</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="name">Имя</string>
+    <string name="add_contact">ДОБАВИТЬ КОНТАКТ</string>
+    <string name="list_contacts">Список контактов</string>
+    <string name="add">ДОБАВИТЬ</string>
+</resources>
