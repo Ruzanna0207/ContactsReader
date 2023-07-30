@@ -1,8 +1,10 @@
-package com.example.activityandnavigationlesson
+package com.example.activityandnavigationlesson.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.activityandnavigationlesson.data_classes.Contact
 import com.example.activityandnavigationlesson.databinding.ForRecyclerviewBinding
 
 
@@ -16,6 +18,10 @@ class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ContactViewHolder>(
             binding.userName.text = contact.name
             binding.userNumber.text = contact.number
 
+            when(contact.isFavorite) {
+                true -> binding.favorite.visibility = View.VISIBLE
+                else -> binding.favorite.visibility = View.GONE
+            }
         }
     }
 

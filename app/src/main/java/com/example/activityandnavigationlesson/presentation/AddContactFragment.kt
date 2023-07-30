@@ -1,7 +1,9 @@
-package com.example.activityandnavigationlesson.fragments
+package com.example.activityandnavigationlesson.presentation
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -10,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,6 +27,8 @@ class AddContactFragment : Fragment() {
     private lateinit var editTextName: EditText
     private lateinit var editTextPhoneNumber: EditText
     private lateinit var buttonAddContact: Button
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var favoriteCheck: CheckBox
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,10 +36,13 @@ class AddContactFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = AddContactBinding.inflate(layoutInflater)
+
         editTextName = binding.userName
         editTextPhoneNumber = binding.userNumber
         buttonAddContact = binding.buttonEnter
-//--------------------------------------------------------------------------------------------------
+        favoriteCheck = binding.favorite
+        sharedPreferences = requireContext().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
         buttonAddContact.setOnClickListener {
             addContact()
         }
@@ -42,9 +50,11 @@ class AddContactFragment : Fragment() {
         return binding.root
     }
 
+    // фун-я для добавл-я контакта
     private fun addContact() {
         val name = editTextName.text.toString().trim()
         val phoneNumber = editTextPhoneNumber.text.toString().trim()
+        val isFavorite = favoriteCheck.isChecked
 
         if (name.isEmpty() || phoneNumber.isEmpty()) {
             Toast.makeText(requireContext(), "Введите имя и номер телефона", Toast.LENGTH_SHORT)
@@ -72,10 +82,13 @@ class AddContactFragment : Fragment() {
             putExtra(ContactsContract.Intents.Insert.PHONE, phoneNumber)
         }
         startActivity(contactIntent)
+        sharedPreferences.edit().putBoolean(phoneNumber, isFavorite).apply()
+
         requireActivity().supportFragmentManager
             .beginTransaction().replace(R.id.frame, Contacts.newInstance()).commit()
     }
-//--------------------------------------------------------------------------------------------------
+
+    //проверка разрешений
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -91,11 +104,11 @@ class AddContactFragment : Fragment() {
             ).show()
         }
     }
-//--------------------------------------------------------------------------------------------------
+
     private fun requestPermissions() {
         requestPermissionLauncher.launch(arrayOf(Manifest.permission.READ_CONTACTS))
     }
-//--------------------------------------------------------------------------------------------------
+
     companion object {
         private const val PERMISSION_REQUEST_CODE = 123
         fun newInstance2() = AddContactFragment()

@@ -1,4 +1,4 @@
-package com.example.activityandnavigationlesson
+package com.example.activityandnavigationlesson.presentation
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -6,10 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.activityandnavigationlesson.R
 import com.example.activityandnavigationlesson.databinding.ActivityCreateContactBinding
 import com.example.activityandnavigationlesson.databinding.CustomDialogBinding
-import com.example.activityandnavigationlesson.fragments.AddContactFragment
-import com.example.activityandnavigationlesson.fragments.Contacts
 
 class MainActivity : AppCompatActivity() {
 

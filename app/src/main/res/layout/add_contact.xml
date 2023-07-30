@@ -67,6 +67,14 @@
                     android:textSize="20sp"
                     android:textStyle="italic" />
 
+                <CheckBox
+                    android:id="@+id/favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Добавить в избранные?"
+                    android:textColor="@color/lite_purple"
+                    android:textSize="20sp"
+                    android:textStyle="italic"/>
 
                 <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/barrier"
